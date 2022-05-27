@@ -7,7 +7,7 @@ import { ValorService } from './valor.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'rxjs';
+  title = 'unsubscribe rxjs';
   show = true;
   /**
    *
