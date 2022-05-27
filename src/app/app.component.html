@@ -347,16 +347,17 @@
       </button>
     </div>
     <div class="form-group mx-sm-3 mb-2">
-      <button
-        type="button"
-        (click)="emitirValor(valor.value)"
-        class="btn btn-danger mb-2"
-      >
+      <button type="button" (click)="show = !show" class="btn btn-danger mb-2">
         Exibir/Sumir os componentes
       </button>
     </div>
   </form>
-  <app-poc-card-base [valor]="valor.value"></app-poc-card-base>
 
   <router-outlet></router-outlet>
+</div>
+<div class="poc-base" *ngIf="show">
+  <app-poc-card-sem-unsubscribe></app-poc-card-sem-unsubscribe>
+  <app-poc-card-com-pipe-async></app-poc-card-com-pipe-async>
+  <app-poc-card-com-unsubscribe></app-poc-card-com-unsubscribe>
+  <app-poc-card-com-unsubscribe-take></app-poc-card-com-unsubscribe-take>
 </div>

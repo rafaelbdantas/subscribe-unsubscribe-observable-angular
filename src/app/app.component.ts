@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ValorService } from './valor.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rxjs';
+  show = true;
+  /**
+   *
+   */
+  constructor(private service: ValorService) {
+ 
+  }
 
   emitirValor(valor: string) {
-    console.log(valor);
+    this.service.emitirValor(valor);
   }
 }

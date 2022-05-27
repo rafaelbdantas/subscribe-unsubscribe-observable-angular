@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-poc-card-base',
@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./poc-card-base.component.less']
 })
 export class PocCardBaseComponent implements OnInit {
-  @Input() valor: string;
+  @Input() header: string;
   @Input() estilo: string;
+  @Input() valor: string;
   constructor() { }
 
   ngOnInit(): void {
