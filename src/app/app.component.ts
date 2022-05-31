@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ValorService } from './valor.service';
+import { ValorService } from './services/valor.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +7,10 @@ import { ValorService } from './valor.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'unsubscribe rxjs';
+  title = 'Subscribe e Unsubscribe rxjs';
   show = true;
-  /**
-   *
-   */
-  constructor(private service: ValorService) {
- 
-  }
+
+  constructor(private service: ValorService) {}
 
   emitirValor(valor: string) {
     this.service.emitirValor(valor);

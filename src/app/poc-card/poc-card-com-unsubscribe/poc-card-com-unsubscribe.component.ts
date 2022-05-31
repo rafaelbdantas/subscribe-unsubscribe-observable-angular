@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ValorService } from 'src/app/services/valor.service';
 import { stilo } from '../stilo-pt';
-import { ValorService } from '../valor.service';
 
 @Component({
   selector: 'app-poc-card-com-unsubscribe',

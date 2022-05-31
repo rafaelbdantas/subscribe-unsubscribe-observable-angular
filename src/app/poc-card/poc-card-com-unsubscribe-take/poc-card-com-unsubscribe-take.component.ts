@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ValorService } from '../valor.service';
 import { take, takeUntil, takeWhile, switchMap, delay } from 'rxjs/operators';
 import { stilo } from '../stilo-pt';
 import { Subject } from 'rxjs';
-import { PlaceHolderApiService } from '../place-holder-api.service';
+import { ValorService } from 'src/app/services/valor.service';
+import { PlaceHolderApiService } from 'src/app/services/place-holder-api.service';
 
 @Component({
   selector: 'app-poc-card-com-unsubscribe-take',
@@ -24,6 +24,7 @@ export class PocCardComUnsubscribeTakeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //Com o takeUntil a inscrição na Observable é cancelada quando o Subject é notificado
     this.service
       .getValor()
       .pipe(takeUntil(this.unsubscribe$))
@@ -32,11 +33,14 @@ export class PocCardComUnsubscribeTakeComponent implements OnInit {
         this.valor = valor;
       });
 
+    //Com o takeWhile o inscrição na observable se mantém até que o predicado retorne false,
+    //ou seja, se o takeWhile for false, a inscrição na observable é cancelada.
     // this.service.getValor().pipe(takeWhile(()=> this.takeWhile)).subscribe((valor: string) => {
     //   console.log(`%cCard com takeWhile: ${valor}`, this.cor );
     //   this.valor = valor
     // });
 
+    //Com o take, a inscrição na Observable é cancelada após o número do contador for atingido.
     // this.service.getValor().pipe(take(1)).subscribe((valor: string) => {
     //   console.log(`%cCard com take: ${valor}`, this.cor );
     //   this.valor = valor
@@ -44,21 +48,8 @@ export class PocCardComUnsubscribeTakeComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.takeWhile = false;
     this.unsubscribe$.next();
     console.log(`%c${this.titulo} destruído`, this.cor);
-  }
-
-  buscarPlaceHolder(id) {
-    const httpResult$ = this.placeHolderApiService.getPlaceHolder(id).pipe(
-      switchMap((placeHolder) => {
-        this.service.emitirValor(placeHolder.title);
-        return this.service.getValor();
-      })
-    );
-
-    httpResult$.pipe(take(1)).subscribe((valor: string) => {
-      console.log(`%cValor do card alterado via api: ${valor}`, this.cor);
-      this.valor = valor;
-    }).add(() => console.log('Add chamado'));
   }
 }

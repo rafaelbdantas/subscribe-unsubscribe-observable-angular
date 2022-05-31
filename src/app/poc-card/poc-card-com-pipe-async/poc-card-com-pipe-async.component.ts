@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ValorService } from 'src/app/services/valor.service';
 import { stilo } from '../stilo-pt';
-import { ValorService } from '../valor.service';
 
 @Component({
   selector: 'app-poc-card-com-pipe-async',
